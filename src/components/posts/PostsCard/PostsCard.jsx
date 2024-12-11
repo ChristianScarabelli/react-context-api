@@ -3,9 +3,12 @@ import Tags from '../../Tags/Tags.jsx'
 import DeletePost from '../../../components/posts/DeletePost.jsx'
 import { BASE_URI } from '../../../config.js'
 import { Link } from 'react-router-dom'
+import { useContext } from 'react'
+import PostsContext from '../../../contexts/PostsContext.js'
 
-export default function PostsCard({ onDelete = () => { }, post = {} }) {
+export default function PostsCard({ post = {} }) {
     const { id, title = '', image, content = '', tags = [], author = '' } = post
+    const { fetchPosts } = useContext(PostsContext)
 
     return (
         <div className="col mb-4">
@@ -20,7 +23,7 @@ export default function PostsCard({ onDelete = () => { }, post = {} }) {
                     <p className="card-text mt-4">{content}</p>
                     <div className="mt-auto d-flex align-items-center justify-content-between">
                         <Link className="btn btn-primary" to={`/posts/${id}`}>Vai al post</Link>
-                        <DeletePost onDelete={onDelete} id={id} />
+                        <DeletePost onDelete={fetchPosts} id={id} />
                     </div>
                 </div>
             </div>
