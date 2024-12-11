@@ -8,27 +8,45 @@ import PostsCreate from './pages/posts/Create.jsx'
 import DefaultLayout from './layouts/DefaultLayout.jsx'
 import BlankLayout from './layouts/BlankLayout.jsx'
 import NotFound from './pages/NotFound.jsx'
+import PostsContext from './contexts/PostsContext.js'
+import { useState } from 'react'
 
 function App() {
 
+  // variabile di stato per i posts
+  const [posts, setPosts] = useState([])
+
+  // funzione per il fetch dei dati dal server
+  function fetchPosts() {
+    axios.get(`${BASE_URI}/posts`)
+      .then(res => {
+        setPosts(res.data) // riempio variabile di stato con i dati dal server
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route index element={<HomePage />}></Route>
-            <Route path='/about' element={<AboutUs />}></Route>
-            <Route path='/posts'>
-              <Route index element={<PostsPage />}></Route>
-              <Route path=':id' element={<PostsShow />}></Route>
-              <Route path='create' element={<PostsCreate />}></Route>
+      <PostsContext.Provider value={{ posts }} >
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route index element={<HomePage />}></Route>
+              <Route path='/about' element={<AboutUs />}></Route>
+              <Route path='/posts'>
+                <Route index element={<PostsPage />}></Route>
+                <Route path=':id' element={<PostsShow />}></Route>
+                <Route path='create' element={<PostsCreate />}></Route>
+              </Route>
             </Route>
-          </Route>
-          <Route element={<BlankLayout />}>
-            <Route path='*' element={<NotFound />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route element={<BlankLayout />}>
+              <Route path='*' element={<NotFound />}></Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </PostsContext.Provider>
     </>
   )
 

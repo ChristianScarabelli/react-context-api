@@ -3,22 +3,12 @@ import { useState, useEffect } from "react"
 import { BASE_URI } from '../../config.js'
 import { Link } from "react-router-dom"
 import PostsCard from './PostsCard/PostsCard.jsx'
+import { useContext } from "react"
+import PostsContext from "../../contexts/PostsContext.js"
 
 export default function PostsList() {
 
-    // variabile di stato per i posts
-    const [posts, setPosts] = useState([])
-
-    // funzione per il fetch dei dati dal server
-    function fetchPosts() {
-        axios.get(`${BASE_URI}/posts`)
-            .then(res => {
-                setPosts(res.data) // riempio variabile di stato con i dati dal server
-            })
-            .catch(err => {
-                console.error(err)
-            })
-    }
+    const { value } = useContext(PostsContext)
 
     // faccio il fetch solo al primo montaggio del componente
     useEffect(() => {
