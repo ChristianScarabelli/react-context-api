@@ -10,6 +10,8 @@ import BlankLayout from './layouts/BlankLayout.jsx'
 import NotFound from './pages/NotFound.jsx'
 import PostsContext from './contexts/PostsContext.js'
 import { useState } from 'react'
+import axios from 'axios'
+import { BASE_URI } from './config.js'
 
 function App() {
 
@@ -29,7 +31,7 @@ function App() {
 
   return (
     <>
-      <PostsContext.Provider value={{ posts }} >
+      <PostsContext.Provider value={{ posts, fetchPosts }} >
         <BrowserRouter>
           <Routes>
             <Route element={<DefaultLayout />}>

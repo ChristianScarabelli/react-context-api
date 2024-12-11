@@ -8,7 +8,7 @@ import PostsContext from "../../contexts/PostsContext.js"
 
 export default function PostsList() {
 
-    const { value } = useContext(PostsContext)
+    const { posts, fetchPosts } = useContext(PostsContext)
 
     // faccio il fetch solo al primo montaggio del componente
     useEffect(() => {
