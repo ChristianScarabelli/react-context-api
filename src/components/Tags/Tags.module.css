@@ -1,0 +1,36 @@
+/* Colori specifici per i tag */
+.tag_dolci {
+    background-color: #e34c26;
+}
+
+.tag_torte {
+    background-color: #264de4;
+}
+
+.tag_antipasti {
+    background-color: rgb(89, 209, 209);
+}
+
+.tag_ricette_vegetariane {
+    background-color: #49db4c;
+}
+
+.tag_ricette_al_forno {
+    background-color: rgb(220, 213, 80);
+}
+
+.tag_primi_piatti {
+    background-color: rgb(157, 135, 48);
+}
+
+.tag_dolci_veloci {
+    background-color: rgb(201, 89, 209);
+}
+
+.tag_ricette_veloci {
+    background-color: rgb(209, 203, 89);
+}
+
+.tag_dolci_al_cioccolato {
+    background-color: rgb(129, 93, 25);
+}
