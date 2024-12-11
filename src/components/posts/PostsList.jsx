@@ -10,7 +10,7 @@ export default function PostsList() {
 
     const { posts, fetchPosts } = useContext(PostsContext)
 
-    // faccio il fetch solo al primo montaggio del componente
+    // fetch dei post solo al primo montaggio del componente
     useEffect(() => {
         fetchPosts()
     }, [])

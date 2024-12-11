@@ -9,7 +9,7 @@ import DefaultLayout from './layouts/DefaultLayout.jsx'
 import BlankLayout from './layouts/BlankLayout.jsx'
 import NotFound from './pages/NotFound.jsx'
 import PostsContext from './contexts/PostsContext.js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { BASE_URI } from './config.js'
 
@@ -29,9 +29,24 @@ function App() {
       })
   }
 
+  // variabile di stato per categories
+  const [categories, setCategories] = useState([])
+
+  // funzione per il fetch dei dati dal server
+  function fetchCategories() {
+    axios.get(`${BASE_URI}/categories`)
+      .then(res => {
+        setCategories(res.data) // riempio variabile di stato con i dati dal server
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
+
   return (
     <>
-      <PostsContext.Provider value={{ posts, fetchPosts }} >
+      <PostsContext.Provider value={{ posts, fetchPosts, categories, fetchCategories }} >
         <BrowserRouter>
           <Routes>
             <Route element={<DefaultLayout />}>
